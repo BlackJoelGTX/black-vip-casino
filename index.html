@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlackVip Casino | Ultra Premium Definitive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>BlackVip Casino | Ultra Premium Definitive Edition</title>
+	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- VARIABLES DE DISEÑO PREMIUM --- */
+        /* ============================================================
+           SISTEMA DE VARIABLES Y DISEÑO VIP
+           ============================================================ */
         :root {
             --gold: #c5a059;
             --gold-light: #e9d5a3;
@@ -19,9 +23,14 @@
             --green-casino: #2e7d32;
             --ocre: #8b4513;
             --shadow-gold: rgba(197, 160, 89, 0.3);
+            --neon-glow: 0 0 15px var(--gold);
         }
 
-        /* --- ESTILOS BASE --- */
+        /* ============================================================
+           ESTILOS BASE Y SCROLLBAR PREMIUM
+           ============================================================ */
+        * { box-sizing: border-box; }
+        
         body { 
             background-color: var(--black-bg); 
             color: var(--white); 
@@ -32,308 +41,298 @@
             overflow-x: hidden;
         }
 
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+
         h1, h2, h3, .logo { 
             font-family: 'Cinzel', serif; 
             letter-spacing: 3px; 
             text-transform: uppercase; 
             color: var(--gold);
+            margin-top: 0;
         }
 
-        /* --- PANTALLA DE ACCESO --- */
+        /* ============================================================
+           PANTALLA DE ACCESO (AUTHENTICATION)
+           ============================================================ */
         #auth-container { 
             position: fixed; 
             inset: 0; 
             background: var(--black-bg); 
-            z-index: 5000; 
+            z-index: 9000; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
         }
 
         .auth-box { 
-            background: rgba(15, 15, 15, 0.98); 
+            background: rgba(10, 10, 10, 0.98); 
             padding: 60px; 
-            border-radius: 12px; 
-            border: 2px solid var(--gold); 
+            border-radius: 20px; 
+            border: 1px solid var(--gold); 
             text-align: center; 
-            width: 420px; 
-            box-shadow: 0 0 60px var(--shadow-gold);
+            width: 450px; 
+            box-shadow: 0 0 80px rgba(0,0,0,1), 0 0 30px var(--shadow-gold);
+            animation: authFadeIn 1.2s ease;
         }
+
+        @keyframes authFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
         .auth-box input { 
             width: 100%; 
-            padding: 16px; 
+            padding: 18px; 
             margin: 15px 0; 
             border: none; 
             border-bottom: 2px solid var(--gold);
-            background: rgba(255, 255, 255, 0.03); 
+            background: rgba(255, 255, 255, 0.02); 
             color: #fff; 
             outline: none; 
-            box-sizing: border-box; 
             font-size: 1rem;
-            transition: 0.3s;
+            transition: 0.4s;
+            text-align: center;
         }
 
-        .auth-box input:focus {
-            background: rgba(197, 160, 89, 0.1);
-            border-bottom-color: var(--gold-light);
-        }
+        .auth-box input:focus { background: rgba(197, 160, 89, 0.1); border-bottom-color: var(--gold-light); }
 
-        /* --- NAVEGACIÓN Y HEADER --- */
+        /* ============================================================
+           HEADER Y ESTADO DE FONDOS
+           ============================================================ */
         header { 
             display: none; 
-            justify-content: space-around; 
+            justify-content: space-between; 
             align-items: center; 
-            padding: 25px 0;
-            background: rgba(0, 0, 0, 0.9); 
+            padding: 0 50px;
+            height: 90px;
+            background: rgba(0, 0, 0, 0.95); 
             border-bottom: 1px solid var(--gold);
             position: sticky; 
             top: 0; 
-            z-index: 1000; 
-            backdrop-filter: blur(20px);
+            z-index: 2000; 
+            backdrop-filter: blur(25px);
         }
 
         .balance-card { 
-            background: linear-gradient(145deg, var(--gold), var(--gold-dark)); 
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark)); 
             color: black; 
-            padding: 12px 35px; 
-            border-radius: 6px; 
-            font-weight: 800; 
+            padding: 12px 40px; 
+            border-radius: 8px; 
+            font-weight: 900; 
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 0 10px rgba(255,255,255,0.4);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
         }
 
-        .balance-card:hover { 
-            transform: scale(1.08) translateY(-2px); 
-            box-shadow: 0 8px 25px var(--shadow-gold);
-        }
+        .balance-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--shadow-gold); }
+        .balance-card span#bal-val { font-size: 1.4rem; font-family: 'Orbitron', sans-serif; }
 
-        /* --- DISEÑO DEL LOBBY --- */
+        /* ============================================================
+           LOBBY Y CARTAS DE JUEGO (GRID)
+           ============================================================ */
         #main-content { 
             display: none; 
+            padding: 60px 5%; 
             flex-direction: column; 
             align-items: center; 
-            padding: 50px 20px; 
         }
 
         .lobby { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 30px; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; 
             width: 100%; 
-            max-width: 1250px; 
+            max-width: 1300px; 
         }
 
-        @media (max-width: 950px) { .lobby { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 600px) { .lobby { grid-template-columns: 1fr; } }
-
         .game-card { 
-            background: var(--dark-gray); 
+            background: #080808; 
             position: relative; 
             border-radius: 15px; 
             overflow: hidden;
             cursor: pointer; 
-            transition: 0.5s ease; 
-            border: 1px solid #222; 
-            height: 220px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            border: 1px solid #1a1a1a; 
+            height: 250px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
         }
 
         .game-card:hover { 
-            transform: translateY(-15px); 
+            transform: translateY(-20px); 
             border-color: var(--gold); 
-            box-shadow: 0 20px 50px var(--shadow-gold);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 20px var(--shadow-gold); 
         }
 
-        .game-card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            opacity: 0.35; 
-            transition: 0.7s; 
-        }
-
-        .game-card:hover img { 
-            opacity: 0.7; 
-            transform: scale(1.15); 
-        }
+        .game-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.8s; }
+        .game-card:hover img { opacity: 0.85; transform: scale(1.1); }
 
         .game-card h3 { 
             position: absolute; 
-            bottom: 25px; 
-            left: 25px; 
-            color: var(--gold-light); 
-            margin: 0; 
-            text-shadow: 3px 3px 10px black; 
-            font-size: 1.5rem;
+            bottom: 30px; 
+            left: 30px; 
+            font-size: 1.8rem; 
+            text-shadow: 2px 2px 10px black; 
+            z-index: 10;
         }
 
-        /* --- VENTANAS MODALES --- */
+        /* ============================================================
+           SISTEMA DE VENTANAS MODALES
+           ============================================================ */
         .modal { 
             display: none; 
             position: fixed; 
             inset: 0; 
-            background: rgba(0, 0, 0, 0.98); 
-            z-index: 2000; 
+            background: rgba(0,0,0,0.96); 
+            z-index: 5000; 
             align-items: center; 
             justify-content: center; 
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(12px);
         }
 
         .game-window { 
-            background: #0a0a0a; 
+            background: #000; 
             width: 95%; 
-            max-width: 900px; 
-            padding: 50px; 
+            max-width: 1000px; 
+            padding: 60px; 
             border: 1px solid var(--gold); 
             position: relative; 
-            max-height: 90vh; 
-            overflow-y: auto; 
-            border-radius: 12px;
+            border-radius: 20px;
+            max-height: 95vh;
+            overflow-y: auto;
             box-shadow: 0 0 100px rgba(0,0,0,1);
         }
 
-        .close-modal { 
-            position: absolute; 
-            top: 25px; 
-            right: 30px; 
-            color: var(--gold); 
-            font-size: 3rem; 
-            cursor: pointer; 
-            line-height: 1;
-        }
+        .close-modal { position: absolute; top: 30px; right: 30px; color: var(--gold); font-size: 3.5rem; cursor: pointer; line-height: 1; transition: 0.3s; }
+        .close-modal:hover { color: #fff; transform: rotate(90deg); }
 
-        /* --- COMPONENTES DE JUEGO --- */
-        .status-msg { 
-            font-size: 1.5rem; 
-            color: var(--gold); 
-            margin-bottom: 30px; 
-            font-weight: 700; 
-            text-align: center; 
-            text-transform: uppercase; 
-            min-height: 40px; 
-            letter-spacing: 2px;
-        }
-
-        .win-anim { color: var(--green-casino) !important; text-shadow: 0 0 20px var(--green-casino); }
-        .lose-anim { color: var(--red-casino) !important; text-shadow: 0 0 20px var(--red-casino); }
-
-        .btn { 
-            padding: 18px 35px; 
-            border: none; 
-            cursor: pointer; 
-            font-family: 'Cinzel'; 
-            font-weight: 800; 
-            transition: 0.3s; 
-            margin: 10px; 
-            border-radius: 5px; 
-            text-transform: uppercase; 
-            font-size: 1rem;
-        }
-
-        .btn-gold { 
-            background: linear-gradient(to bottom, var(--gold-light), var(--gold)); 
-            color: black; 
-            box-shadow: 0 5px 0 var(--gold-dark); 
-        }
-
-        .btn-gold:active { 
-            transform: translateY(4px); 
-            box-shadow: none; 
-        }
-
-        .btn-outline { 
-            background: transparent; 
-            border: 2px solid var(--gold); 
-            color: var(--gold); 
-        }
-
-        .btn-outline:hover { 
-            background: var(--gold); 
-            color: black; 
-        }
-
-        /* --- RULETA INTERCALADA PROFESIONAL --- */
+        /* ============================================================
+           RULETA MEJORADA (PRECISIÓN TÉCNICA)
+           ============================================================ */
         .wheel-container { 
             position: relative; 
-            width: 320px; 
-            height: 320px; 
+            width: 400px; 
+            height: 400px; 
             margin: 40px auto; 
+            perspective: 1000px;
         }
 
         #r-wheel { 
             width: 100%; 
             height: 100%; 
             border-radius: 50%; 
-            border: 15px solid #1a1a1a; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.7);
-            transition: 6s cubic-bezier(0.1, 0, 0.1, 1);
+            border: 18px solid #1a1a1a; 
+            box-shadow: 0 0 60px rgba(0,0,0,1), inset 0 0 40px rgba(0,0,0,0.8);
+            transition: 8s cubic-bezier(0.15, 0, 0.05, 1); 
             background: conic-gradient(
-                #2e7d32 0deg 9.7deg,
-                #d32f2f 9.7deg 19.4deg, #111 19.4deg 29.1deg, #d32f2f 29.1deg 38.8deg, #111 38.8deg 48.5deg,
-                #d32f2f 48.5deg 58.2deg, #111 58.2deg 67.9deg, #d32f2f 67.9deg 77.6deg, #111 77.6deg 87.3deg,
-                #d32f2f 87.3deg 97deg, #111 97deg 106.7deg, #d32f2f 106.7deg 116.4deg, #111 116.4deg 126.1deg,
-                #d32f2f 126.1deg 135.8deg, #111 135.8deg 145.5deg, #d32f2f 145.5deg 155.2deg, #111 155.2deg 164.9deg,
-                #d32f2f 164.9deg 174.6deg, #111 174.6deg 184.3deg, #d32f2f 184.3deg 194deg, #111 194deg 203.7deg,
-                #d32f2f 203.7deg 213.4deg, #111 213.4deg 223.1deg, #d32f2f 223.1deg 232.8deg, #111 232.8deg 242.5deg,
-                #d32f2f 242.5deg 252.2deg, #111 252.2deg 261.9deg, #d32f2f 261.9deg 271.6deg, #111 271.6deg 281.3deg,
-                #d32f2f 281.3deg 291deg, #111 291deg 300.7deg, #d32f2f 300.7deg 310.4deg, #111 310.4deg 320.1deg,
-                #d32f2f 320.1deg 329.8deg, #111 329.8deg 339.5deg, #d32f2f 339.5deg 349.2deg, #111 349.2deg 360deg
+                #2e7d32 0deg 9.73deg,
+                #d32f2f 9.73deg 19.46deg, #111 19.46deg 29.19deg, #d32f2f 29.19deg 38.92deg, #111 38.92deg 48.65deg,
+                #d32f2f 48.65deg 58.38deg, #111 58.38deg 68.11deg, #d32f2f 68.11deg 77.84deg, #111 77.84deg 87.57deg,
+                #d32f2f 87.57deg 97.3deg, #111 97.3deg 107.03deg, #d32f2f 107.03deg 116.76deg, #111 116.76deg 126.49deg,
+                #d32f2f 126.49deg 136.22deg, #111 136.22deg 145.95deg, #d32f2f 145.95deg 155.68deg, #111 155.68deg 165.41deg,
+                #d32f2f 165.41deg 175.14deg, #111 175.14deg 184.87deg, #d32f2f 184.87deg 194.6deg, #111 194.6deg 204.33deg,
+                #d32f2f 204.33deg 214.06deg, #111 214.06deg 223.79deg, #d32f2f 223.79deg 233.52deg, #111 233.52deg 243.25deg,
+                #d32f2f 243.25deg 252.98deg, #111 252.98deg 262.71deg, #d32f2f 262.71deg 272.44deg, #111 272.44deg 282.17deg,
+                #d32f2f 282.17deg 291.9deg, #111 291.9deg 301.63deg, #d32f2f 301.63deg 311.36deg, #111 311.36deg 321.09deg,
+                #d32f2f 321.09deg 330.82deg, #111 330.82deg 340.55deg, #d32f2f 340.55deg 350.28deg, #111 350.28deg 360deg
             );
         }
 
         .wheel-pointer { 
             position: absolute; 
-            top: -15px; 
+            top: -20px; 
             left: 50%; 
             transform: translateX(-50%);
             width: 0; 
             height: 0; 
-            border-left: 20px solid transparent; 
-            border-right: 20px solid transparent;
-            border-top: 40px solid var(--gold); 
-            z-index: 50; 
-            filter: drop-shadow(0 0 10px black);
+            border-left: 25px solid transparent; 
+            border-right: 25px solid transparent;
+            border-top: 50px solid var(--gold); 
+            z-index: 100; 
+            filter: drop-shadow(0 0 15px black);
         }
 
-        /* --- CAJERO Y TABLAS --- */
-        .bank-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 30px; 
-            margin-top: 30px; 
-        }
-
-        .bank-card { 
-            background: #111; 
-            padding: 30px; 
-            border-radius: 10px; 
-            border: 1px solid #333; 
-            border-top: 4px solid var(--gold);
-        }
-
-        .history-table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 30px; 
-            color: #ccc;
-        }
-
-        .history-table th { 
-            background: #1a1a1a; 
+        /* ============================================================
+           ESTILOS DE BOTONES Y MENSAJES
+           ============================================================ */
+        .status-msg { 
+            font-size: 1.8rem; 
             color: var(--gold); 
-            padding: 15px; 
+            margin-bottom: 35px; 
+            font-weight: 800; 
+            text-align: center; 
             text-transform: uppercase; 
-            font-size: 0.8rem;
-            border-bottom: 2px solid var(--gold);
+            min-height: 45px; 
+            letter-spacing: 3px;
         }
 
-        .history-table td { 
-            padding: 12px; 
-            text-align: center; 
-            border-bottom: 1px solid #222; 
+        .win-anim { color: var(--green-casino) !important; text-shadow: 0 0 25px var(--green-casino); animation: pulse 0.5s infinite alternate; }
+        .lose-anim { color: var(--red-casino) !important; text-shadow: 0 0 25px var(--red-casino); }
+
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+        .btn { 
+            padding: 20px 40px; 
+            border: none; 
+            cursor: pointer; 
+            font-family: 'Cinzel'; 
+            font-weight: 900; 
+            transition: 0.3s; 
+            margin: 10px; 
+            border-radius: 8px; 
+            text-transform: uppercase; 
+            font-size: 1.1rem;
+            letter-spacing: 2px;
         }
+
+        .btn-gold { background: linear-gradient(to bottom, var(--gold-light), var(--gold)); color: black; box-shadow: 0 6px 0 var(--gold-dark); }
+        .btn-gold:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-gold:active { transform: translateY(4px); box-shadow: none; }
+        .btn-gold:disabled { filter: grayscale(1); cursor: not-allowed; opacity: 0.6; }
+
+        .btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+        .btn-outline:hover { background: var(--gold); color: black; }
+
+        /* ============================================================
+           CAJERO Y HISTORIAL (TABLES)
+           ============================================================ */
+        .bank-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
+        .bank-card { background: #0a0a0a; padding: 40px; border-radius: 15px; border: 1px solid #222; border-top: 5px solid var(--gold); }
+        .history-table { width: 100%; border-collapse: collapse; margin-top: 35px; color: #aaa; font-size: 0.9rem; }
+        .history-table th { background: #111; color: var(--gold); padding: 18px; text-transform: uppercase; border-bottom: 2px solid var(--gold); text-align: center; }
+        .history-table td { padding: 15px; text-align: center; border-bottom: 1px solid #1a1a1a; }
+
+        /* Estilo para las cartas de Blackjack / Poker / Truco */
+        .card-container {
+            perspective: 1000px;
+        }
+        .casino-card {
+            width: 85px; height: 120px;
+            background: white; color: black;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 2.2rem;
+            border: 3px solid var(--gold);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            animation: dealCard 0.5s ease-out;
+            position: relative;
+        }
+        @keyframes dealCard { from { transform: translateY(-200px) rotate(20deg); opacity: 0; } to { transform: translateY(0) rotate(0); opacity: 1; } }
+        
+        /* Poker Specific Styles */
+        .poker-deck { display: flex; justify-content: center; gap: 10px; margin: 20px 0; min-height: 130px; flex-wrap: wrap; }
+        .poker-pot { font-family: 'Orbitron'; color: var(--gold); font-size: 1.5rem; text-align: center; margin: 10px 0; }
+
+        /* ============================================================
+           ESTILOS AÑADIDOS: TRUCO VENEZOLANO
+           ============================================================ */
+        .truco-board { background: #0a4d28; border: 10px solid var(--ocre); border-radius: 50px; padding: 30px; position: relative; min-height: 500px; box-shadow: inset 0 0 100px #000; margin-top: 20px; }
+        .truco-score { position: absolute; right: 20px; top: 20px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--gold); font-family: 'Orbitron'; color: var(--gold); font-size: 0.9rem; }
+        .vira-area { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); text-align: center; }
+        .hand-area { display: flex; justify-content: center; gap: 15px; margin: 20px 0; min-height: 130px; }
+        .played-area { display: flex; justify-content: center; align-items: center; gap: 50px; height: 160px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 20px; margin: 20px 0; }
     </style>
 </head>
 <body>
@@ -341,51 +340,125 @@
     <div id="auth-container">
         <div class="auth-box">
             <h1 id="auth-main-title">BLACK VIP CASINO</h1>
-            <p style="color:#666; font-size: 0.7rem; margin-bottom: 20px;">EXCLUSIVE ACCESS ONLY</p>
-            <input type="text" id="user-in" placeholder="NOMBRE DE SOCIO">
-            <input type="password" id="pass-in" placeholder="CÓDIGO SECRETO">
+            <p style="color:var(--gold); font-size: 0.8rem; letter-spacing: 5px; margin-bottom: 25px;">MEMBERSHIP REQUIRED</p>
+            <input type="text" id="user-in" placeholder="IDENTIFICADOR DE SOCIO">
+            <input type="password" id="pass-in" placeholder="CLAVE CRIPTOGRÁFICA">
             <div id="reg-fields" style="display:none">
-                <input type="text" id="bank-in" placeholder="DATOS DE PAGO MÓVIL / BANCO">
+                <input type="text" id="bank-in" placeholder="CUENTA BANCARIA / PAGO MÓVIL">
             </div>
-            <button class="btn btn-gold" style="width:100%; margin-top:20px;" onclick="processAuth()">INICIAR SESIÓN</button>
-            <p style="font-size: 0.8rem; margin-top:30px; cursor:pointer; color:var(--gold); font-weight: 600;" onclick="toggleAuth()">¿SOLICITAR NUEVA MEMBRESÍA?</p>
+            <button class="btn btn-gold" style="width:100%; margin-top:20px;" onclick="processAuth()">ENTRAR AL CLUB</button>
+            <p style="font-size: 0.85rem; margin-top:35px; cursor:pointer; color:var(--gold-light); font-weight: 600;" onclick="toggleAuth()">SOLICITAR INGRESO AL CLUB</p>
         </div>
     </div>
 
     <header id="vip-header">
-        <div class="logo">BLACK VIP</div>
+        <div class="logo" style="font-size: 1.8rem; font-weight: 900;">BLACK VIP</div>
         <div class="balance-card" onclick="openBank()">
-            <span style="font-size:0.6rem; display:block; opacity: 0.8;">SALDO DISPONIBLE</span>
-            <span id="bal-val">0</span> <small>BC</small>
+            <span style="font-size:0.65rem; display:block; opacity: 0.9; letter-spacing: 1px;">CRÉDITOS DISPONIBLES</span>
+            <div><span id="bal-val">0</span> <small style="font-size: 0.8rem;">BC</small></div>
         </div>
-        <div style="color:var(--gold); cursor:pointer; font-weight:700; font-size:0.9rem; border-bottom: 1px solid var(--gold);" onclick="location.reload()">CERRAR SESIÓN</div>
+        <div style="color:var(--gold); cursor:pointer; font-weight:700; font-size:0.9rem; border-bottom: 2px solid var(--gold); padding-bottom: 5px;" onclick="location.reload()">ABANDONAR CLUB</div>
     </header>
 
     <div id="main-content">
         <div class="lobby">
             <div class="game-card" onclick="openGame('ruleta')">
-                <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=600">
+                <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800">
                 <h3>RULETA ROYAL</h3>
             </div>
+            <div class="game-card" onclick="openGame('truco')">
+                <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=800">
+                <h3>TRUCO VENEZOLANO</h3>
+            </div>
             <div class="game-card" onclick="openGame('blackjack')">
-                <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=600">
+                <img src="https://images.unsplash.com/photo-1544161515-4af6b1d8e159?w=800">
                 <h3>BLACKJACK 21</h3>
             </div>
+            <div class="game-card" onclick="openGame('poker')">
+                <img src="https://images.unsplash.com/photo-1541252260730-0412e3e2104e?w=800">
+                <h3>POKER TEXAS HOLDEM</h3>
+            </div>
             <div class="game-card" onclick="openGame('aviator')">
-                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600">
+                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800">
                 <h3>AVIATOR PRO</h3>
             </div>
             <div class="game-card" onclick="openGame('slots')">
-                <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=600">
+                <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=800">
                 <h3>LUCKY SLOTS</h3>
             </div>
             <div class="game-card" onclick="openGame('mines')">
-                <img src="https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?w=600">
+                <img src="https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?w=800">
                 <h3>MINAS VIP</h3>
             </div>
             <div class="game-card" onclick="openBank()">
-                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800">
                 <h3>CAJERO VIP</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-truco" class="modal">
+        <div class="game-window" style="max-width: 1100px;">
+            <span class="close-modal" onclick="closeAll()">×</span>
+            <h2>TRUCO VENEZOLANO</h2>
+            <div id="t-status" class="status-msg">¡HAGAN SUS APUESTAS!</div>
+            
+            <div class="truco-board">
+                <div class="truco-score">
+                    NOSOTROS: <span id="t-score-p">0</span>/12<br>
+                    ELLOS: <span id="t-score-c">0</span>/12
+                </div>
+
+                <div class="vira-area">
+                    <div style="font-size:0.7rem; color:var(--gold-light); margin-bottom:5px;">VIRA</div>
+                    <div id="t-vira" class="casino-card" style="cursor:default">?</div>
+                </div>
+
+                <div id="t-hand-c" class="hand-area"></div>
+
+                <div class="played-area">
+                    <div id="t-played-c"></div>
+                    <div id="t-played-p"></div>
+                </div>
+
+                <div id="t-hand-p" class="hand-area"></div>
+            </div>
+
+            <div style="text-align:center; margin-top:20px;">
+                <button id="t-start" class="btn btn-gold" onclick="startTruco()">APOSTAR 100 BC</button>
+                <button id="t-btn-truco" class="btn btn-outline" onclick="cantar('truco')" disabled>¡TRUCO!</button>
+                <button id="t-btn-envido" class="btn btn-outline" onclick="cantar('envido')" disabled>ENVIDO</button>
+                <button id="t-btn-flor" class="btn btn-outline" onclick="cantar('flor')" disabled>FLOR</button>
+                <button id="t-btn-mazo" class="btn btn-outline" onclick="irseAlMazo()" disabled style="color:var(--red-casino)">MAZO</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-poker" class="modal">
+        <div class="game-window">
+            <span class="close-modal" onclick="closeAll()">×</span>
+            <h2>POKER TEXAS HOLDEM</h2>
+            <div id="p-status" class="status-msg">BIENVENIDO A LA MESA</div>
+            
+            <div id="poker-table" style="background:#0a3d1e; padding:30px; border:10px solid var(--ocre); border-radius:100px; box-shadow: inset 0 0 100px black;">
+                <div class="poker-pot">BOTE: <span id="p-pot">0</span> BC</div>
+                
+                <div style="text-align:center; color:rgba(255,255,255,0.3); font-size:0.7rem;">RIVAL</div>
+                <div id="p-rival-hand" class="poker-deck"></div>
+                
+                <div style="text-align:center; color:rgba(255,255,255,0.3); font-size:0.7rem;">MESA (COMMUNITY)</div>
+                <div id="p-community" class="poker-deck"></div>
+                
+                <hr style="border:none; border-top:1px dashed rgba(255,255,255,0.1);">
+                
+                <div style="text-align:center; color:rgba(255,255,255,0.3); font-size:0.7rem;">TU MANO</div>
+                <div id="p-player-hand" class="poker-deck"></div>
+            </div>
+
+            <div style="text-align:center; margin-top:30px;">
+                <button id="p-start" class="btn btn-gold" onclick="startP()">ENTRAR (100 BC)</button>
+                <button id="p-call" class="btn btn-outline" onclick="callP()" disabled>IGUALAR / PASAR</button>
+                <button id="p-fold" class="btn btn-outline" onclick="foldP()" disabled style="border-color:var(--red-casino); color:var(--red-casino);">RETIRARSE</button>
             </div>
         </div>
     </div>
@@ -394,7 +467,7 @@
         <div class="game-window">
             <span class="close-modal" onclick="closeAll()">×</span>
             <h2>RULETA ROYAL</h2>
-            <div id="r-status" class="status-msg">SELECCIONE UN COLOR PARA APOSTAR</div>
+            <div id="r-status" class="status-msg">HAGAN SUS APUESTAS</div>
             
             <div class="wheel-container">
                 <div class="wheel-pointer"></div>
@@ -402,8 +475,8 @@
             </div>
 
             <div style="text-align:center; margin-top:50px;">
-                <button class="btn btn-gold" style="background:var(--red-casino); color:white; border:none;" onclick="playR('rojo')">APOSTAR ROJO (X2)</button>
-                <button class="btn btn-gold" style="background:#111; color:white; border:1px solid var(--gold);" onclick="playR('negro')">APOSTAR NEGRO (X2)</button>
+                <button id="r-btn-red" class="btn btn-gold" style="background:var(--red-casino); color:white; border:none;" onclick="playR('rojo')">APOSTAR ROJO (X2)</button>
+                <button id="r-btn-black" class="btn btn-gold" style="background:#111; color:white; border:1px solid var(--gold);" onclick="playR('negro')">APOSTAR NEGRO (X2)</button>
             </div>
         </div>
     </div>
@@ -412,17 +485,17 @@
         <div class="game-window">
             <span class="close-modal" onclick="closeAll()">×</span>
             <h2>BLACKJACK 21</h2>
-            <div id="b-status" class="status-msg">ESPERANDO APUESTA INICIAL</div>
+            <div id="b-status" class="status-msg">ESPERANDO APUESTA</div>
             
-            <div style="background:#0a3d1e; padding:40px; border:10px solid var(--ocre); border-radius:50px; box-shadow: inset 0 0 100px black;">
-                <div style="text-align:center; color:rgba(255,255,255,0.5); font-size:0.8rem; margin-bottom:10px;">MANO DE LA CASA</div>
-                <div id="b-dealer" style="display:flex; justify-content:center; gap:15px; min-height:110px;"></div>
-                <hr style="border:none; border-top:1px dashed rgba(255,255,255,0.2); margin:30px 0;">
-                <div style="text-align:center; color:rgba(255,255,255,0.5); font-size:0.8rem; margin-bottom:10px;">TU MANO</div>
-                <div id="b-player" style="display:flex; justify-content:center; gap:15px; min-height:110px;"></div>
+            <div style="background:#0a3d1e; padding:50px; border:12px solid var(--ocre); border-radius:60px; box-shadow: inset 0 0 120px black;">
+                <div style="text-align:center; color:rgba(255,255,255,0.4); font-size:0.9rem; margin-bottom:15px; font-weight: 800; letter-spacing: 2px;">BANQUERO</div>
+                <div id="b-dealer" style="display:flex; justify-content:center; gap:20px; min-height:130px;"></div>
+                <hr style="border:none; border-top:2px dashed rgba(255,255,255,0.1); margin:40px 0;">
+                <div style="text-align:center; color:rgba(255,255,255,0.4); font-size:0.9rem; margin-bottom:15px; font-weight: 800; letter-spacing: 2px;">TU MANO</div>
+                <div id="b-player" style="display:flex; justify-content:center; gap:20px; min-height:130px;"></div>
             </div>
 
-            <div style="text-align:center; margin-top:40px;">
+            <div style="text-align:center; margin-top:50px;">
                 <button id="b-start" class="btn btn-gold" onclick="startB()">APOSTAR 50 BC</button>
                 <button id="b-hit" class="btn btn-outline" onclick="hitB()" disabled>PEDIR CARTA</button>
                 <button id="b-stand" class="btn btn-outline" onclick="standB()" disabled>PLANTARSE</button>
@@ -434,11 +507,11 @@
         <div class="game-window">
             <span class="close-modal" onclick="closeAll()">×</span>
             <h2>AVIATOR PRO</h2>
-            <div id="c-status" class="status-msg">ESPERANDO DESPEGUE</div>
-            <div id="c-mult" style="font-size:7rem; text-align:center; color:var(--gold); font-weight:900; text-shadow: 0 0 30px var(--purple-vip);">1.00x</div>
-            <div style="text-align:center; margin-top:30px;">
+            <div id="c-status" class="status-msg">LISTO PARA EL DESPEGUE</div>
+            <div id="c-mult" style="font-size:8rem; text-align:center; color:var(--white); font-weight:900; font-family:'Orbitron'; text-shadow: 0 0 40px var(--gold-dark); margin: 20px 0;">1.00x</div>
+            <div style="text-align:center; margin-top:40px;">
                 <button id="c-start" class="btn btn-gold" onclick="startC()">APOSTAR 100 BC</button>
-                <button id="c-cash" class="btn btn-outline" onclick="cashC()" disabled>RETIRAR GANANCIAS</button>
+                <button id="c-cash" class="btn btn-outline" onclick="cashC()" disabled>RETIRAR BC</button>
             </div>
         </div>
     </div>
@@ -447,14 +520,14 @@
         <div class="game-window">
             <span class="close-modal" onclick="closeAll()">×</span>
             <h2>LUCKY SLOTS</h2>
-            <div id="s-status" class="status-msg">JACKPOT: 500 BC</div>
-            <div style="display:flex; justify-content:center; gap:20px; margin:50px 0;">
-                <div id="sl1" style="width:100px; height:130px; background:white; color:black; font-size:4rem; display:flex; align-items:center; justify-content:center; border-radius:10px; border:5px solid var(--gold);">💎</div>
-                <div id="sl2" style="width:100px; height:130px; background:white; color:black; font-size:4rem; display:flex; align-items:center; justify-content:center; border-radius:10px; border:5px solid var(--gold);">💎</div>
-                <div id="sl3" style="width:100px; height:130px; background:white; color:black; font-size:4rem; display:flex; align-items:center; justify-content:center; border-radius:10px; border:5px solid var(--gold);">💎</div>
+            <div id="s-status" class="status-msg">POZO ACUMULADO: 500 BC</div>
+            <div style="display:flex; justify-content:center; gap:25px; margin:60px 0;">
+                <div id="sl1" class="casino-card" style="width:120px; height:160px; font-size:5rem;">💎</div>
+                <div id="sl2" class="casino-card" style="width:120px; height:160px; font-size:5rem;">💎</div>
+                <div id="sl3" class="casino-card" style="width:120px; height:160px; font-size:5rem;">💎</div>
             </div>
             <div style="text-align:center;">
-                <button class="btn btn-gold" onclick="playS()">GIRAR RODILLOS (20 BC)</button>
+                <button id="s-spin" class="btn btn-gold" onclick="playS()">GIRAR (20 BC)</button>
             </div>
         </div>
     </div>
@@ -463,49 +536,50 @@
         <div class="game-window">
             <span class="close-modal" onclick="closeAll()">×</span>
             <h2>MINAS VIP</h2>
-            <div id="m-status" class="status-msg">ENCUENTRA LOS DIAMANTES</div>
-            <div id="m-grid" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; max-width:450px; margin:auto;"></div>
-            <div style="text-align:center; margin-top:40px;">
-                <button id="m-start" class="btn btn-gold" onclick="startM()">NUEVA PARTIDA (100 BC)</button>
-                <button id="m-cash" class="btn btn-outline" onclick="cashM()" disabled>COBRAR BC</button>
+            <div id="m-status" class="status-msg">CAMPO DE MINAS ACTIVO</div>
+            <div id="m-grid" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:15px; max-width:500px; margin:auto;"></div>
+            <div style="text-align:center; margin-top:50px;">
+                <button id="m-start" class="btn btn-gold" onclick="startM()">INICIAR (100 BC)</button>
+                <button id="m-cash" class="btn btn-outline" onclick="cashM()" disabled>RETIRAR BOTÍN</button>
             </div>
         </div>
     </div>
 
     <div id="modal-bank" class="modal">
-        <div class="game-window" style="max-width:950px;">
+        <div class="game-window" style="max-width:1000px;">
             <span class="close-modal" onclick="closeAll()">×</span>
-            <h2>CENTRO DE OPERACIONES CAJERO VIP</h2>
+            <h2>CENTRO DE FONDOS VIP</h2>
             
             <div class="bank-grid">
                 <div class="bank-card">
-                    <h3 style="font-size:1.1rem; margin-top:0;">RECARGAR SALDO</h3>
-                    <p style="font-size:0.8rem; color:#888;">Transfiere a la cuenta oficial y reporta tu pago para recibir BC instantáneamente.</p>
-                    <div style="background:#000; padding:20px; border-radius:5px; font-size:0.85rem; border:1px solid #222;">
-                        <span style="color:var(--gold)">BANCO:</span> 0102 - VENEZUELA<br>
-                        <span style="color:var(--gold)">TELÉFONO:</span> 0412-4209277<br>
-                        <span style="color:var(--gold)">C.I:</span> 30.041.715
+                    <h3 style="font-size:1.2rem; margin-top:0;">RECARGA DE CRÉDITOS</h3>
+                    <p style="font-size:0.85rem; color:#888; margin-bottom: 20px;">Utilice los siguientes datos para su transferencia y notifique para la acreditación inmediata.</p>
+                    <div style="background:#000; padding:25px; border-radius:10px; font-size:0.9rem; border:1px solid #333; line-height: 2;">
+                        <span style="color:var(--gold); font-weight: 800;">BANCO:</span> 0102 - BANCO DE VENEZUELA<br>
+                        <span style="color:var(--gold); font-weight: 800;">TITULAR:</span> BLACK VIP CASINO GROUP<br>
+                        <span style="color:var(--gold); font-weight: 800;">TELÉFONO:</span> 0412-4209277<br>
+                        <span style="color:var(--gold); font-weight: 800;">C.I / RIF:</span> 30.041.715
                     </div>
-                    <button class="btn btn-gold" style="width:100%; margin:20px 0 0 0; font-size:0.8rem;" onclick="alert('Notificación enviada al administrador. Tu saldo se actualizará en breve.')">NOTIFICAR PAGO REALIZADO</button>
+                    <button class="btn btn-gold" style="width:100%; margin-top:25px;" onclick="alert('Sistema de verificación activado. Su saldo se actualizará tras la confirmación de la red.')">NOTIFICAR TRANSFERENCIA</button>
                 </div>
 
                 <div class="bank-card">
-                    <h3 style="font-size:1.1rem; margin-top:0;">RETIRAR GANANCIAS</h3>
-                    <p id="bank-info-display" style="font-size:0.8rem; color:var(--gold-light); font-weight:bold;"></p>
-                    <input type="number" id="wit-val" placeholder="CANTIDAD DE BC A RETIRAR" style="width:100%; padding:12px; background:transparent; border:1px solid #444; color:white; margin-top:10px;">
-                    <button class="btn btn-outline" style="width:100%; margin:20px 0 0 0; font-size:0.8rem;" onclick="processWithdraw()">SOLICITAR RETIRO</button>
+                    <h3 style="font-size:1.2rem; margin-top:0;">RETIRO DE GANANCIAS</h3>
+                    <p id="bank-info-display" style="font-size:0.85rem; color:var(--gold-light); font-weight:bold; margin-bottom: 15px;"></p>
+                    <input type="number" id="wit-val" placeholder="CANTIDAD DE BC A RETIRAR" style="width:100%; padding:15px; background:rgba(0,0,0,0.5); border:1px solid #444; color:white; border-radius: 5px;">
+                    <button class="btn btn-outline" style="width:100%; margin-top:25px;" onclick="processWithdraw()">SOLICITAR LIQUIDACIÓN</button>
                 </div>
             </div>
 
-            <h3 style="margin-top:40px; font-size:1.1rem;">HISTORIAL RECIENTE DE JUEGO</h3>
-            <div style="max-height:300px; overflow-y:auto; border:1px solid #222;">
+            <h3 style="margin-top:50px; font-size:1.2rem; border-left: 5px solid var(--gold); padding-left: 15px;">BITÁCORA DE OPERACIONES RECIENTES</h3>
+            <div style="max-height:350px; overflow-y:auto; border:1px solid #222; border-radius: 10px;">
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>JUEGO</th>
-                            <th>APUESTA</th>
-                            <th>RESULTADO</th>
-                            <th>HORA</th>
+                            <th>TIPO DE ACTIVIDAD</th>
+                            <th>MONTO (BC)</th>
+                            <th>ESTADO / RESULTADO</th>
+                            <th>MARCA TEMPORAL</th>
                         </tr>
                     </thead>
                     <tbody id="hist-body">
@@ -516,282 +590,379 @@
     </div>
 
     <script>
-        /* --- GESTIÓN DE SONIDOS --- */
-        const audioSystem = {
+	<script>
+    // 1. Configuración de conexión con TU base de datos
+    const SUPABASE_URL = 'https://fktwltpcooukzzvtazqn.supabase.co'; // Reemplaza con tu URL
+    const SUPABASE_KEY = 'sb_publishable_qxEHBRTzpcDXTGWo6wTgNQ_ZR1TyXjk';       // Reemplaza con tu Key
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Variables globales que ya tenías (déjalas debajo)
+    let isReg = false;
+    let balance = 1000; 
+    // ... resto de tus variables
+        /* ============================================================
+           SISTEMA DE AUDIO INTEGRADO
+           ============================================================ */
+        const sounds = {
             card: new Audio('https://www.soundjay.com/buttons/button-16.mp3'),
             win: new Audio('https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3'),
             lose: new Audio('https://www.soundjay.com/buttons/button-11.mp3'),
             spin: new Audio('https://www.soundjay.com/buttons/button-48.mp3'),
-            coins: new Audio('https://www.soundjay.com/misc/sounds/coin-drop-1.mp3')
+            coins: new Audio('https://www.soundjay.com/misc/sounds/coin-drop-1.mp3'),
+            tick: new Audio('https://www.soundjay.com/buttons/button-50.mp3')
         };
 
-        function playSound(type) {
+        function playSound(key) {
             try {
-                audioSystem[type].currentTime = 0;
-                audioSystem[type].play();
-            } catch(e) { console.warn("Audio no disponible"); }
+                sounds[key].currentTime = 0;
+                sounds[key].play();
+            } catch(e) { console.log("Audio Bloqueado"); }
         }
 
-        /* --- NÚCLEO DEL SISTEMA --- */
-        let database = JSON.parse(localStorage.getItem('blackvip_final_v1')) || {};
-        let currentUser = null;
-        let isRegistering = false;
+        /* ============================================================
+           NÚCLEO LOGÍSTICO Y PERSISTENCIA (DATABASE)
+           ============================================================ */
+        let db = JSON.parse(localStorage.getItem('blackvip_final_v1')) || {};
+        let user = null;
+        let isReg = false;
 
         function toggleAuth() {
-            isRegistering = !isRegistering;
-            document.getElementById('auth-main-title').innerText = isRegistering ? "REGISTRO VIP" : "BLACK VIP CASINO";
-            document.getElementById('reg-fields').style.display = isRegistering ? "block" : "none";
+            isReg = !isReg;
+            document.getElementById('auth-main-title').innerText = isReg ? "MEMBRESÍA NUEVA" : "BLACK VIP CASINO";
+            document.getElementById('reg-fields').style.display = isReg ? "block" : "none";
         }
 
-        function processAuth() {
-            const user = document.getElementById('user-in').value.trim();
-            const pass = document.getElementById('pass-in').value.trim();
+        async function processAuth() {
+    const u = document.getElementById('user-in').value.trim();
+    const p = document.getElementById('pass-in').value.trim();
+    const email = u + "@casino.com"; 
 
-            if(!user || !pass) return alert("Por favor complete los campos.");
+    if (isReg) {
+        // REGISTRO
+        const { data, error } = await supabase.auth.signUp({ email, password: p });
+        if (error) return alert("Error: " + error.message);
+        
+        // Crear perfil en la tabla 'profiles'
+        await supabase.from('profiles').insert([{ id: data.user.id, username: u, balance: 1000 }]);
+        alert("¡Cuenta VIP creada! Ahora inicia sesión.");
+        toggleAuth(); 
+    } else {
+        // LOGIN
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password: p });
+        if (error) return alert("Acceso denegado: Revisa usuario o clave.");
+        
+        window.currentUser = data.user;
+        await loadUserData(); // Paso 4
+        initVIP();
+    }
+}
 
-            if(isRegistering) {
-                const bank = document.getElementById('bank-in').value;
-                if(database[user]) return alert("El socio ya existe.");
-                database[user] = { pass: pass, bank: bank, balance: 1000, history: [] };
-                saveData();
-                alert("Membresía creada con éxito. Ya puede entrar.");
-                toggleAuth();
-            } else {
-                if(database[user] && database[user].pass === pass) {
-                    currentUser = user;
-                    loginSuccess();
-                } else {
-                    alert("Credenciales incorrectas.");
-                }
-            }
-        }
-
-        function loginSuccess() {
+        function initVIP() {
             document.getElementById('auth-container').style.display = 'none';
             document.getElementById('vip-header').style.display = 'flex';
             document.getElementById('main-content').style.display = 'flex';
-            document.getElementById('bank-info-display').innerText = "DESTINO: " + database[currentUser].bank;
-            updateBalanceUI();
+            document.getElementById('bank-info-display').innerText = "CUENTA DESTINO: " + db[user].bank;
+            updateUI();
         }
 
-        function saveData() {
-            localStorage.setItem('blackvip_final_v1', JSON.stringify(database));
+        function save() { localStorage.setItem('blackvip_final_v1', JSON.stringify(db)); }
+
+        function updateUI() {
+            document.getElementById('bal-val').innerText = db[user].balance.toLocaleString();
+            save();
+            const h = document.getElementById('hist-body');
+            if(h) {
+                h.innerHTML = db[user].history.map(i => `
+                    <tr>
+                        <td style="font-weight:700">${i.game}</td>
+                        <td>${i.bet} BC</td>
+                        <td style="color:${i.res.includes('+') ? '#2e7d32' : '#d32f2f'}; font-weight:900">${i.res}</td>
+                        <td>${i.time}</td>
+                    </tr>
+                `).join('');
+            }
         }
 
-        function updateBalanceUI() {
-            document.getElementById('bal-val').innerText = database[currentUser].balance.toLocaleString();
-            saveData();
-            renderHistoryTable();
+        function addLog(game, bet, result) 
+		function addLog(g, b, r) {
+            db[user].history.unshift({ game: g, bet: b, res: r, time: new Date().toLocaleTimeString() });
+            updateUI();
+			syncBalance(balance);
         }
 
-        function addToHistory(gameName, betAmount, resultText) {
-            const entry = {
-                game: gameName,
-                bet: betAmount,
-                res: resultText,
-                time: new Date().toLocaleTimeString()
-            };
-            database[currentUser].history.unshift(entry);
-            updateBalanceUI();
-        }
+        /* ============================================================
+           LOGICA: MODALES Y NAVEGACIÓN
+           ============================================================ */
+        function openGame(id) { closeAll(); document.getElementById('modal-' + id).style.display = 'flex'; }
+        function openBank() { closeAll(); document.getElementById('modal-bank').style.display = 'flex'; updateUI(); }
+        function closeAll() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); clearInterval(aviatorInt); }
 
-        function renderHistoryTable() {
-            const container = document.getElementById('hist-body');
-            if(!container) return;
-            container.innerHTML = database[currentUser].history.map(item => `
-                <tr>
-                    <td>${item.game}</td>
-                    <td>${item.bet} BC</td>
-                    <td style="color:${item.res.includes('+') ? 'var(--green-casino)' : 'var(--red-casino)'}; font-weight:bold;">
-                        ${item.res}
-                    </td>
-                    <td>${item.time}</td>
-                </tr>
-            `).join('');
-        }
+        /* ============================================================
+           LOGICA MEJORADA: RULETA ROYAL (PRECIZIÓN)
+           ============================================================ */
+        let spinning = false;
 
-        /* --- CONTROL DE MODALES --- */
-        function openGame(id) {
-            closeAll();
-            document.getElementById('modal-' + id).style.display = 'flex';
-        }
-
-        function openBank() {
-            closeAll();
-            document.getElementById('modal-bank').style.display = 'flex';
-        }
-
-        function closeAll() {
-            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-        }
-
-        /* --- LÓGICA: RULETA PROFESIONAL --- */
-        function playR(userChoice) {
-            if(database[currentUser].balance < 50) return alert("Saldo insuficiente.");
+        function playR(choice) {
+            if(spinning) return;
+            if(db[user].balance < 50) return alert("Créditos insuficientes.");
             
-            database[currentUser].balance -= 50;
-            updateBalanceUI();
+            db[user].balance -= 50;
+            updateUI();
+            spinning = true;
 
             const wheel = document.getElementById('r-wheel');
             const status = document.getElementById('r-status');
-            status.innerText = "¡LA BOLA ESTÁ GIRANDO!";
+            
+            document.getElementById('r-btn-red').disabled = true;
+            document.getElementById('r-btn-black').disabled = true;
+
+            status.innerText = "¡LA SUERTE ESTÁ GIRANDO!";
             status.className = "status-msg";
             playSound('spin');
 
-            const spinDegrees = 2500 + Math.floor(Math.random() * 1000);
-            wheel.style.transform = `rotate(${spinDegrees}deg)`;
+            const spins = 8 + Math.floor(Math.random() * 5);
+            const extraDeg = Math.floor(Math.random() * 360);
+            const totalDeg = (spins * 360) + extraDeg;
+
+            wheel.style.transform = `rotate(${totalDeg}deg)`;
+
+            let tickInt = setInterval(() => playSound('tick'), 300);
 
             setTimeout(() => {
-                const finalAngle = spinDegrees % 360;
-                let winColor;
+                clearInterval(tickInt);
+                spinning = false;
+                document.getElementById('r-btn-red').disabled = false;
+                document.getElementById('r-btn-black').disabled = false;
 
-                // Lógica honesta basada en los segmentos del gradiente CSS
-                if(finalAngle >= 0 && finalAngle <= 9) {
-                    winColor = 'verde';
-                } else if((finalAngle % 19.4) < 9.7) {
-                    winColor = 'rojo';
+                const realAngle = totalDeg % 360;
+                let colorFound;
+                const needlePos = (360 - realAngle) % 360;
+
+                if(needlePos >= 0 && needlePos <= 9.73) {
+                    colorFound = 'verde';
                 } else {
-                    winColor = 'negro';
+                    const segment = Math.floor((needlePos - 9.73) / 9.73);
+                    colorFound = (segment % 2 === 0) ? 'rojo' : 'negro';
                 }
 
-                if(userChoice === winColor) {
-                    database[currentUser].balance += 100;
-                    status.innerText = "¡VICTORIA! +100 BC";
+                if(choice === colorFound) {
+                    db[user].balance += 100;
+                    status.innerText = "¡VICTORIA VIP! +" + colorFound.toUpperCase();
                     status.classList.add('win-anim');
                     playSound('win');
-                    addToHistory('Ruleta Royal', 50, '+100');
+                    addLog('Ruleta Royal', 50, '+100');
                 } else {
-                    status.innerText = "CAYÓ EN " + winColor.toUpperCase();
+                    status.innerText = "RESULTADO: " + colorFound.toUpperCase();
                     status.classList.add('lose-anim');
                     playSound('lose');
-                    addToHistory('Ruleta Royal', 50, '-50');
+                    addLog('Ruleta Royal', 50, '-50');
                 }
-                updateBalanceUI();
-            }, 6000);
+                updateUI();
+            }, 8000); 
         }
 
-        /* --- LÓGICA: BLACKJACK 21 --- */
-        let playerHand = [], dealerHand = [];
-        const cardValues = { '2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':10,'Q':10,'K':10,'A':11 };
+        /* ============================================================
+           LOGICA: BLACKJACK 21
+           ============================================================ */
+        let pHand = [], dHand = [];
+        const vals = { '2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':10,'Q':10,'K':10,'A':11 };
 
-        function getRandomCard() {
-            const cards = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-            return cards[Math.floor(Math.random() * cards.length)];
+        function getCard() {
+            const suits = ['♠','♣','♥','♦'];
+            const c = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+            return c[Math.floor(Math.random() * c.length)];
         }
 
-        function calculateScore(hand) {
-            let score = 0, aces = 0;
-            hand.forEach(c => {
-                score += cardValues[c];
-                if(c === 'A') aces++;
-            });
-            while(score > 21 && aces > 0) {
-                score -= 10;
-                aces--;
-            }
-            return score;
+        function score(h) {
+            let s = 0, a = 0;
+            h.forEach(c => { s += vals[c]; if(c === 'A') a++; });
+            while(s > 21 && a > 0) { s -= 10; a--; }
+            return s;
         }
 
         function startB() {
-            if(database[currentUser].balance < 50) return;
-            database[currentUser].balance -= 50;
-            updateBalanceUI();
+            if(db[user].balance < 50) return alert("Saldo insuficiente.");
+            db[user].balance -= 50;
+            updateUI();
 
-            playerHand = [getRandomCard(), getRandomCard()];
-            dealerHand = [getRandomCard(), getRandomCard()];
+            pHand = [getCard(), getCard()];
+            dHand = [getCard(), getCard()];
 
             document.getElementById('b-start').disabled = true;
             document.getElementById('b-hit').disabled = false;
             document.getElementById('b-stand').disabled = false;
-            document.getElementById('b-status').innerText = "TU TURNO: ¿PIDES O TE PLANTAS?";
+            document.getElementById('b-status').innerText = "¿OTRA O TE PLANTAS?";
             document.getElementById('b-status').className = "status-msg";
             
             playSound('card');
-            renderBlackjackUI(false);
+            renderB(false);
         }
 
-        function renderBlackjackUI(showAll) {
-            const pArea = document.getElementById('b-player');
-            const dArea = document.getElementById('b-dealer');
-
-            pArea.innerHTML = playerHand.map(c => `<div style="width:70px; height:100px; background:white; color:black; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.8rem; border:2px solid var(--gold); shadow: 4px 4px 10px black;">${c}</div>`).join('');
-            
-            if(showAll) {
-                dArea.innerHTML = dealerHand.map(c => `<div style="width:70px; height:100px; background:#eee; color:black; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.8rem; border:2px solid var(--gold);">${c}</div>`).join('');
+        function renderB(all) {
+            const pA = document.getElementById('b-player');
+            const dA = document.getElementById('b-dealer');
+            pA.innerHTML = pHand.map(c => `<div class="casino-card">${c}</div>`).join('');
+            if(all) {
+                dA.innerHTML = dHand.map(c => `<div class="casino-card" style="background:#eee">${c}</div>`).join('');
             } else {
-                dArea.innerHTML = `<div style="width:70px; height:100px; background:#eee; color:black; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.8rem; border:2px solid var(--gold);">${dealerHand[0]}</div><div style="width:70px; height:100px; background:var(--purple-vip); border-radius:8px; border:2px solid var(--gold);"></div>`;
+                dA.innerHTML = `<div class="casino-card" style="background:#eee">${dHand[0]}</div><div class="casino-card" style="background:var(--purple-vip); color:transparent">?</div>`;
             }
         }
 
         function hitB() {
-            playerHand.push(getRandomCard());
+            pHand.push(getCard());
             playSound('card');
-            renderBlackjackUI(false);
-            if(calculateScore(playerHand) > 21) {
-                finishBlackjack("TE PASASTE DE 21", "-50");
-                playSound('lose');
-            }
+            renderB(false);
+            if(score(pHand) > 21) endB("BUST: TE PASASTE", "-50");
         }
 
         function standB() {
-            while(calculateScore(dealerHand) < 17) {
-                dealerHand.push(getRandomCard());
-            }
-            renderBlackjackUI(true);
-            const pScore = calculateScore(playerHand);
-            const dScore = calculateScore(dealerHand);
-
-            if(dScore > 21 || pScore > dScore) {
-                database[currentUser].balance += 100;
-                finishBlackjack("¡GANASTE LA MANO!", "+100");
-                playSound('win');
-            } else if(pScore === dScore) {
-                database[currentUser].balance += 50;
-                finishBlackjack("EMPATE TÉCNICO", "0");
-            } else {
-                finishBlackjack("LA CASA GANA", "-50");
-                playSound('lose');
-            }
+            while(score(dHand) < 17) dHand.push(getCard());
+            renderB(true);
+            const ps = score(pHand), ds = score(dHand);
+            if(ds > 21 || ps > ds) { db[user].balance += 100; endB("¡GANASTE!", "+100"); }
+            else if(ps === ds) { db[user].balance += 50; endB("EMPATE", "0"); }
+            else endB("LA CASA GANA", "-50");
         }
 
-        function finishBlackjack(msg, res) {
-            const st = document.getElementById('b-status');
-            st.innerText = msg;
-            st.className = res.includes('+') ? "status-msg win-anim" : "status-msg lose-anim";
+        function endB(m, r) {
+            const s = document.getElementById('b-status');
+            s.innerText = m;
+            s.className = r.includes('+') ? "status-msg win-anim" : "status-msg lose-anim";
             document.getElementById('b-start').disabled = false;
             document.getElementById('b-hit').disabled = true;
             document.getElementById('b-stand').disabled = true;
-            addToHistory('Blackjack 21', 50, res);
+            addLog('Blackjack 21', 50, r);
+            if(r.includes('+')) playSound('win'); else playSound('lose');
         }
 
-        /* --- LÓGICA: AVIATOR PRO --- */
-        let crashInterval, currentMult = 1.0, isFlying = false;
+        /* ============================================================
+           LOGICA: POKER TEXAS HOLDEM (HEADS-UP)
+           ============================================================ */
+        let pokerDeck = [], pokerPlayer = [], pokerRival = [], pokerCommunity = [], pokerPot = 0, pokerPhase = 0;
+        
+        function initPokerDeck() {
+            const s = ['♠','♣','♥','♦'];
+            const v = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+            pokerDeck = [];
+            s.forEach(suit => v.forEach(val => pokerDeck.push({val, suit})));
+            pokerDeck.sort(() => Math.random() - 0.5);
+        }
+
+        function startP() {
+            if(db[user].balance < 100) return alert("Saldo insuficiente.");
+            db[user].balance -= 100;
+            pokerPot = 200; 
+            pokerPhase = 1; 
+            initPokerDeck();
+            
+            pokerPlayer = [pokerDeck.pop(), pokerDeck.pop()];
+            pokerRival = [pokerDeck.pop(), pokerDeck.pop()];
+            pokerCommunity = [];
+            
+            document.getElementById('p-start').disabled = true;
+            document.getElementById('p-call').disabled = false;
+            document.getElementById('p-fold').disabled = false;
+            document.getElementById('p-status').innerText = "RONDA: PRE-FLOP";
+            renderP(false);
+            updateUI();
+        }
+
+        function renderP(showRival) {
+            const pHand = document.getElementById('p-player-hand');
+            const rHand = document.getElementById('p-rival-hand');
+            const cHand = document.getElementById('p-community');
+            
+            pHand.innerHTML = pokerPlayer.map(c => `<div class="casino-card" style="color:${(c.suit==='♥'||c.suit==='♦')?'red':'black'}">${c.val}<small style="font-size:1rem; position:absolute; bottom:5px; right:5px;">${c.suit}</small></div>`).join('');
+            
+            if(showRival) {
+                rHand.innerHTML = pokerRival.map(c => `<div class="casino-card" style="color:${(c.suit==='♥'||c.suit==='♦')?'red':'black'}">${c.val}<small style="font-size:1rem; position:absolute; bottom:5px; right:5px;">${c.suit}</small></div>`).join('');
+            } else {
+                rHand.innerHTML = `<div class="casino-card" style="background:var(--purple-vip)"></div><div class="casino-card" style="background:var(--purple-vip)"></div>`;
+            }
+            
+            cHand.innerHTML = pokerCommunity.map(c => `<div class="casino-card" style="color:${(c.suit==='♥'||c.suit==='♦')?'red':'black'}">${c.val}<small style="font-size:1rem; position:absolute; bottom:5px; right:5px;">${c.suit}</small></div>`).join('');
+            document.getElementById('p-pot').innerText = pokerPot;
+        }
+
+        function callP() {
+            playSound('card');
+            pokerPhase++;
+            
+            if(pokerPhase === 2) { 
+                pokerCommunity.push(pokerDeck.pop(), pokerDeck.pop(), pokerDeck.pop());
+                document.getElementById('p-status').innerText = "RONDA: EL FLOP";
+            } else if(pokerPhase === 3) { 
+                pokerCommunity.push(pokerDeck.pop());
+                document.getElementById('p-status').innerText = "RONDA: EL TURN";
+            } else if(pokerPhase === 4) { 
+                pokerCommunity.push(pokerDeck.pop());
+                document.getElementById('p-status').innerText = "RONDA FINAL: RIVER";
+                document.getElementById('p-call').innerText = "MOSTRAR CARTAS";
+            } else if(pokerPhase === 5) {
+                endP();
+            }
+            renderP(false);
+        }
+
+        function foldP() {
+            document.getElementById('p-status').innerText = "TE RETIRASTE";
+            addLog('Poker VIP', 100, '-100');
+            resetP();
+        }
+
+        function endP() {
+            renderP(true);
+            const pVal = Math.random() > 0.45; 
+            if(pVal) {
+                db[user].balance += pokerPot;
+                document.getElementById('p-status').innerText = "¡GANASTE EL BOTE!";
+                document.getElementById('p-status').className = "status-msg win-anim";
+                playSound('win');
+                addLog('Poker VIP', 100, `+${pokerPot}`);
+            } else {
+                document.getElementById('p-status').innerText = "EL RIVAL GANA";
+                document.getElementById('p-status').className = "status-msg lose-anim";
+                playSound('lose');
+                addLog('Poker VIP', 100, '-100');
+            }
+            resetP();
+        }
+
+        function resetP() {
+            document.getElementById('p-start').disabled = false;
+            document.getElementById('p-call').disabled = true;
+            document.getElementById('p-fold').disabled = true;
+            document.getElementById('p-call').innerText = "IGUALAR / PASAR";
+            updateUI();
+        }
+
+        /* ============================================================
+           LOGICA: AVIATOR PRO
+           ============================================================ */
+        let aviatorInt, curM = 1.0, flying = false;
 
         function startC() {
-            if(database[currentUser].balance < 100) return;
-            database[currentUser].balance -= 100;
-            updateBalanceUI();
-
-            isFlying = true;
-            currentMult = 1.0;
+            if(db[user].balance < 100) return;
+            db[user].balance -= 100;
+            updateUI();
+            flying = true; curM = 1.0;
             document.getElementById('c-start').disabled = true;
             document.getElementById('c-cash').disabled = false;
-            document.getElementById('c-status').innerText = "EL AVIÓN ESTÁ SUBIENDO...";
+            document.getElementById('c-status').innerText = "EL AVIÓN ESTÁ ASCENDIENDO...";
             document.getElementById('c-status').className = "status-msg";
 
-            let crashPoint = 1.1 + (Math.random() * 3.5);
+            let crash = 1.1 + (Math.random() * 4.5);
 
-            crashInterval = setInterval(() => {
-                currentMult += 0.04;
-                document.getElementById('c-mult').innerText = currentMult.toFixed(2) + "x";
-                
-                if(currentMult >= crashPoint) {
-                    clearInterval(crashInterval);
-                    isFlying = false;
-                    document.getElementById('c-status').innerText = "¡EL AVIÓN SE FUE!";
+            aviatorInt = setInterval(() => {
+                curM += 0.03;
+                document.getElementById('c-mult').innerText = curM.toFixed(2) + "x";
+                if(curM >= crash) {
+                    clearInterval(aviatorInt); flying = false;
+                    document.getElementById('c-status').innerText = "¡EL AVIÓN EXPLOTÓ!";
                     document.getElementById('c-status').className = "status-msg lose-anim";
                     playSound('lose');
-                    addToHistory('Aviator Pro', 100, '-100');
+                    addLog('Aviator Pro', 100, '-100');
                     document.getElementById('c-start').disabled = false;
                     document.getElementById('c-cash').disabled = true;
                 }
@@ -799,127 +970,283 @@
         }
 
         function cashC() {
-            if(!isFlying) return;
-            clearInterval(crashInterval);
-            isFlying = false;
-            let winAmount = Math.floor(100 * currentMult);
-            database[currentUser].balance += winAmount;
-            
-            document.getElementById('c-status').innerText = "¡COBRASTE " + winAmount + " BC!";
+            if(!flying) return;
+            clearInterval(aviatorInt); flying = false;
+            let w = Math.floor(100 * curM);
+            db[user].balance += w;
+            document.getElementById('c-status').innerText = "¡COBRASTE " + w + " BC!";
             document.getElementById('c-status').className = "status-msg win-anim";
             playSound('coins');
-            addToHistory('Aviator Pro', 100, '+' + winAmount);
-            
+            addLog('Aviator Pro', 100, '+' + w);
             document.getElementById('c-start').disabled = false;
             document.getElementById('c-cash').disabled = true;
         }
 
-        /* --- LÓGICA: LUCKY SLOTS --- */
+        /* ============================================================
+           LOGICA: LUCKY SLOTS
+           ============================================================ */
         function playS() {
-            if(database[currentUser].balance < 20) return;
-            database[currentUser].balance -= 20;
-            updateBalanceUI();
+            if(db[user].balance < 20) return;
+            db[user].balance -= 20;
+            updateUI();
             playSound('spin');
+            document.getElementById('s-spin').disabled = true;
 
-            const reels = [document.getElementById('sl1'), document.getElementById('sl2'), document.getElementById('sl3')];
-            const items = ['🍒','💎','7️⃣','🔔','🍇'];
+            const r = [document.getElementById('sl1'), document.getElementById('sl2'), document.getElementById('sl3')];
+            const items = ['🍒','💎','7️⃣','🔔','🍇','🍀'];
 
-            let timer = setInterval(() => {
-                reels.forEach(r => r.innerText = items[Math.floor(Math.random()*items.length)]);
+            let t = setInterval(() => {
+                r.forEach(el => el.innerText = items[Math.floor(Math.random()*items.length)]);
             }, 100);
 
             setTimeout(() => {
-                clearInterval(timer);
-                const results = reels.map(r => {
-                    let res = items[Math.floor(Math.random()*items.length)];
-                    r.innerText = res;
-                    return res;
+                clearInterval(t);
+                const res = r.map(el => {
+                    let val = items[Math.floor(Math.random()*items.length)];
+                    el.innerText = val; return val;
                 });
 
-                if(results[0] === results[1] && results[1] === results[2]) {
-                    database[currentUser].balance += 500;
+                if(res[0] === res[1] && res[1] === res[2]) {
+                    db[user].balance += 500;
                     document.getElementById('s-status').innerText = "¡JACKPOT +500 BC!";
                     document.getElementById('s-status').className = "status-msg win-anim";
                     playSound('win');
-                    addToHistory('Lucky Slots', 20, '+500');
+                    addLog('Lucky Slots', 20, '+500');
                 } else {
-                    document.getElementById('s-status').innerText = "SIGUE INTENTANDO";
-                    playSound('lose');
-                    addToHistory('Lucky Slots', 20, '-20');
+                    document.getElementById('s-status').innerText = "SUERTE PARA LA PRÓXIMA";
+                    addLog('Lucky Slots', 20, '-20');
                 }
-            }, 1500);
+                document.getElementById('s-spin').disabled = false;
+            }, 2000);
         }
 
-        /* --- LÓGICA: MINAS VIP --- */
-        let minePositions = [], foundDiamonds = 0, mineActive = false;
+        /* ============================================================
+           LOGICA: MINAS VIP
+           ============================================================ */
+        let mPos = [], mFound = 0, mAct = false;
 
         function startM() {
-            if(database[currentUser].balance < 100) return;
-            database[currentUser].balance -= 100;
-            updateBalanceUI();
-
-            mineActive = true;
-            foundDiamonds = 0;
-            minePositions = Array(25).fill(false);
-            let minesPlaced = 0;
-            while(minesPlaced < 4) {
+            if(db[user].balance < 100) return;
+            db[user].balance -= 100;
+            updateUI();
+            mAct = true; mFound = 0;
+            mPos = Array(25).fill(false);
+            let mCount = 0;
+            while(mCount < 5) {
                 let idx = Math.floor(Math.random() * 25);
-                if(!minePositions[idx]) { minePositions[idx] = true; minesPlaced++; }
+                if(!mPos[idx]) { mPos[idx] = true; mCount++; }
             }
 
-            const grid = document.getElementById('m-grid');
-            grid.innerHTML = '';
+            const g = document.getElementById('m-grid');
+            g.innerHTML = '';
             for(let i=0; i<25; i++) {
-                let cell = document.createElement('div');
-                cell.style = "width:100%; aspect-ratio:1; background:#222; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.5rem; transition:0.2s;";
-                cell.onclick = () => revealMine(i, cell);
-                grid.appendChild(cell);
+                let c = document.createElement('div');
+                c.style = "width:100%; aspect-ratio:1; background:#222; border-radius:10px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.8rem; transition:0.3s; border:1px solid #333;";
+                c.onclick = () => revealM(i, c);
+                g.appendChild(c);
             }
             document.getElementById('m-start').disabled = true;
             document.getElementById('m-cash').disabled = false;
+            document.getElementById('m-status').innerText = "MINAS COLOCADAS: 5";
         }
 
-        function revealMine(idx, element) {
-            if(!mineActive || element.innerText !== '') return;
-            if(minePositions[idx]) {
-                element.innerText = '💣';
-                element.style.background = 'var(--red-casino)';
-                mineActive = false;
-                document.getElementById('m-status').innerText = "¡EXPLOSIÓN! -100 BC";
+        function revealM(idx, el) {
+            if(!mAct || el.innerText !== '') return;
+            if(mPos[idx]) {
+                el.innerText = '💣'; el.style.background = 'var(--red-casino)';
+                mAct = false;
+                document.getElementById('m-status').innerText = "¡EXPLOSIÓN!";
                 document.getElementById('m-status').className = "status-msg lose-anim";
                 playSound('lose');
-                addToHistory('Minas VIP', 100, '-100');
+                addLog('Minas VIP', 100, '-100');
                 document.getElementById('m-start').disabled = false;
                 document.getElementById('m-cash').disabled = true;
             } else {
-                element.innerText = '💎';
-                element.style.background = 'var(--green-casino)';
-                foundDiamonds++;
-                playSound('card');
+                el.innerText = '💎'; el.style.background = 'var(--green-casino)';
+                mFound++; playSound('card');
             }
         }
 
         function cashM() {
-            if(!mineActive) return;
-            mineActive = false;
-            let win = Math.floor(100 * (1 + foundDiamonds * 0.7));
-            database[currentUser].balance += win;
-            document.getElementById('m-status').innerText = "RETIRASTE +" + win + " BC";
+            if(!mAct) return;
+            mAct = false;
+            let w = Math.floor(100 * (1 + mFound * 0.8));
+            db[user].balance += w;
+            document.getElementById('m-status').innerText = "RECOLECTADO: " + w + " BC";
             document.getElementById('m-status').className = "status-msg win-anim";
             playSound('coins');
-            addToHistory('Minas VIP', 100, '+' + win);
+            addLog('Minas VIP', 100, '+' + w);
             document.getElementById('m-start').disabled = false;
             document.getElementById('m-cash').disabled = true;
         }
 
         function processWithdraw() {
-            const val = parseInt(document.getElementById('wit-val').value);
-            if(!val || val <= 0) return alert("Ingrese monto válido.");
-            if(val > database[currentUser].balance) return alert("Saldo insuficiente.");
+            const v = parseInt(document.getElementById('wit-val').value);
+            if(!v || v <= 0 || v > db[user].balance) return alert("Cantidad inválida.");
+            db[user].balance -= v;
+            addLog('Liquidación Cajero', v, 'PROCESANDO');
+            alert("Su solicitud de retiro ha sido enviada con éxito.");
+        }
+
+        /* ============================================================
+           LÓGICA NUEVA: TRUCO VENEZOLANO VIP (MOTOR INTEGRADO)
+           ============================================================ */
+        let tDeck = [], tHandP = [], tHandC = [], tVira = null;
+        let tScoreP = 0, tScoreC = 0;
+        let tTurn = 'P', tPlayedP = [], tPlayedC = [], tRoundsP = 0, tRoundsC = 0;
+
+        function startTruco() {
+            if(db[user].balance < 100) return alert("Saldo insuficiente.");
+            db[user].balance -= 100;
+            updateUI();
+            tScoreP = 0; tScoreC = 0;
+            document.getElementById('t-start').disabled = true;
+            document.getElementById('t-btn-truco').disabled = false;
+            document.getElementById('t-btn-envido').disabled = false;
+            document.getElementById('t-btn-mazo').disabled = false;
+            newHandTruco();
+        }
+
+        function newHandTruco() {
+            const suits = ['Espadas', 'Bastos', 'Oros', 'Copas'];
+            const valsT = ['1', '2', '3', '4', '5', '6', '7', '10', '11', '12'];
+            tDeck = [];
+            suits.forEach(s => valsT.forEach(v => tDeck.push({v, s})));
+            tDeck.sort(() => Math.random() - 0.5);
+
+            tVira = tDeck.pop();
+            tHandP = [tDeck.pop(), tDeck.pop(), tDeck.pop()];
+            tHandC = [tDeck.pop(), tDeck.pop(), tDeck.pop()];
+            tPlayedP = []; tPlayedC = []; tRoundsP = 0; tRoundsC = 0;
+            tTurn = 'P';
+            renderTruco();
+        }
+
+        function renderTruco() {
+            document.getElementById('t-vira').innerHTML = `${tVira.v}<small style="display:block; font-size:0.5rem">${tVira.s}</small>`;
+            document.getElementById('t-score-p').innerText = tScoreP;
+            document.getElementById('t-score-c').innerText = tScoreC;
             
-            database[currentUser].balance -= val;
-            addToHistory('Retiro Cajero', val, 'Pendiente');
-            alert("Su solicitud por " + val + " BC ha sido registrada.");
+            const hp = document.getElementById('t-hand-p');
+            hp.innerHTML = '';
+            tHandP.forEach((c, i) => {
+                let div = document.createElement('div');
+                div.className = 'casino-card';
+                div.innerHTML = `${c.v}<small style="font-size:0.5rem">${c.s}</small>`;
+                div.onclick = () => playCardTruco(i);
+                hp.appendChild(div);
+            });
+
+            document.getElementById('t-hand-c').innerHTML = tHandC.map(() => `<div class="casino-card" style="background:var(--purple-vip)"></div>`).join('');
+            document.getElementById('t-played-p').innerHTML = tPlayedP.length ? renderMiniCard(tPlayedP[tPlayedP.length-1]) : '';
+            document.getElementById('t-played-c').innerHTML = tPlayedC.length ? renderMiniCard(tPlayedC[tPlayedC.length-1]) : '';
+        }
+
+        function renderMiniCard(c) {
+            return `<div class="casino-card" style="background:white; color:black;">${c.v}<small style="display:block; font-size:0.5rem">${c.s}</small></div>`;
+        }
+
+        function playCardTruco(idx) {
+            if(tTurn !== 'P') return;
+            tPlayedP.push(tHandP.splice(idx, 1)[0]);
+            playSound('card');
+            renderTruco();
+            tTurn = 'C';
+            setTimeout(cpuTrucoMove, 1000);
+        }
+
+        function cpuTrucoMove() {
+            if(tHandC.length > 0) {
+                tPlayedC.push(tHandC.splice(0, 1)[0]);
+                playSound('card');
+                renderTruco();
+                evalTrucoRound();
+            }
+        }
+
+        function evalTrucoRound() {
+            let pP = getPower(tPlayedP[tPlayedP.length-1]);
+            let pC = getPower(tPlayedC[tPlayedC.length-1]);
+
+            if(pP >= pC) {
+                tRoundsP++;
+                document.getElementById('t-status').innerText = "GANASTE LA MESA";
+            } else {
+                tRoundsC++;
+                document.getElementById('t-status').innerText = "EL RIVAL GANA MESA";
+            }
+
+            if(tRoundsP === 2 || tRoundsC === 2 || tHandP.length === 0) {
+                if(tRoundsP >= tRoundsC) tScoreP += 1; else tScoreC += 1;
+                
+                if(tScoreP >= 12) {
+                    alert("¡VICTORIA EN EL TRUCO! +300 BC");
+                    db[user].balance += 300;
+                    addLog('Truco Venezolano', 100, '+300');
+                    document.getElementById('t-start').disabled = false;
+                    updateUI();
+                } else if(tScoreC >= 12) {
+                    alert("DERROTA EN EL TRUCO");
+                    addLog('Truco Venezolano', 100, '-100');
+                    document.getElementById('t-start').disabled = false;
+                    updateUI();
+                } else {
+                    setTimeout(newHandTruco, 1500);
+                }
+            } else {
+                tTurn = 'P';
+            }
+        }
+
+        function getPower(c) {
+            // Manillas (Perico y Perica)
+            if(c.v === '11' && c.s === tVira.s) return 100; // Perico
+            if(c.v === '10' && c.s === tVira.s) return 90;  // Perica
+            
+            // Jerarquía base
+            const p = {'1':14, '7':13, '3':12, '2':11, '12':10, '11':9, '10':8, '7':7, '6':6, '5':5, '4':4};
+            let power = p[c.v] || 0;
+
+            // Espadilla, Bastillo, etc.
+            if(c.v === '1' && c.s === 'Espadas') return 50;
+            if(c.v === '1' && c.s === 'Bastos') return 45;
+            if(c.v === '7' && c.s === 'Espadas') return 40;
+            if(c.v === '7' && c.s === 'Oros') return 35;
+
+            return power;
+        }
+
+        function cantar(msg) {
+            document.getElementById('t-status').innerText = "¡CANTADO: " + msg.toUpperCase() + "!";
+            playSound('coins');
+            if(msg === 'truco') tScoreP += 2;
+        }
+
+        function irseAlMazo() {
+            tScoreC += 1;
+            newHandTruco();
+			// NUEVA FUNCIÓN: Trae el saldo real de la base de datos
+async function loadUserData() {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('balance')
+        .eq('id', window.currentUser.id)
+        .single();
+
+    if (data) {
+        balance = data.balance; // Actualizamos la variable global 'balance'
+        updateUI(); // Refrescamos los números en la pantalla
+    }
+}
+
+// NUEVA FUNCIÓN: Guarda el saldo cada vez que ganan o pierden
+async function syncBalance(newBalance) {
+    if (!window.currentUser) return;
+    await supabase
+        .from('profiles')
+        .update({ balance: newBalance })
+        .eq('id', window.currentUser.id);
+}
         }
     </script>
 </body>
